@@ -6,6 +6,7 @@ import java.net.*;
 import javax.swing.*;
 
 
+
 class WeatherData {
     private double temperature;
     private double humidity; 
@@ -40,7 +41,9 @@ class WeatherData {
     }
 
     
-
+    public String toFileString() {
+        return temperature + "," + humidity;
+    }
     
 
 
@@ -104,11 +107,14 @@ public class WeatherApp{
     label4.setVisible(false);
 
     JLabel label5=new JLabel();
-    label5.setBounds(100,470,400,30);
+    label5.setBounds(100, 520, 400, 30);
     
     frame.add(label5);
 
-    
+    JButton label6 = new JButton("Save");
+    label6.setBounds(350,300,100,50);
+    label6.setVisible(false);
+    frame.add(label6);
 
     b.addActionListener(e -> {
         tInput.setVisible(true);
@@ -119,6 +125,7 @@ public class WeatherApp{
         but.setVisible(true);
         label3.setVisible(true);
         label4.setVisible(true);
+        label6.setVisible(true);
     });
 
     tInput.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,7 +151,20 @@ public class WeatherApp{
         
     });
        
+    label6.addActionListener(e -> {
+    try {
+        double hum = Double.parseDouble(hInput.getText());
+        double temp = Double.parseDouble(tInput.getText());
+        WeatherData wd = new WeatherData(temp, hum);
+        FileWriter fw = new FileWriter("weather.txt", true); 
+        fw.write(wd.toFileString() + "\n");
+        fw.close();
+        label5.setText("Data saved successfully!");
 
+    } catch(Exception ex) {
+        label5.setText("Error saving this.");
+    }
+    });
     
    
     
