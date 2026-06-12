@@ -26,5 +26,9 @@ public class WeatherData {
       double var10000 = this.temperature;
       return "Weather Report : \nTemperature : " + var10000 + "℃ \nHumidity : " + this.humidity + "% \nAlert : \n" + checkAlert(this.temperature, this.humidity);
    }
+
+   public String toFileString() {
+    return "Temperature: " + temperature + "°C, " + "Humidity: " + humidity + "%";
+   }
 }
 
