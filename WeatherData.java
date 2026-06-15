@@ -1,34 +1,50 @@
 public class WeatherData {
 
-   private double temperature;
-   private double humidity;
+    private double temperature;
+    private double humidity;
 
-   WeatherData(double var1, double var3) {
-      this.temperature = var1;
-      this.humidity = var3;
-   }
+    public WeatherData(double temperature, double humidity) {
+        this.temperature = temperature;
+        this.humidity = humidity;
+    }
 
-   static String checkAlert(double var0, double var2) {
-      if (var0 > (double)40.0F && var2 > (double)80.0F) {
-         return "High Temperature Alert and High Humidity Alert";
-      } else if (var0 < (double)10.0F && var2 > (double)80.0F) {
-         return "Low Temperature Alert and High Humidity Alert";
-      } else if (var2 > (double)80.0F) {
-         return "High Humidity Alert";
-      } else if (var0 > (double)40.0F) {
-         return "High Temperature Alert";
-      } else {
-         return var0 < (double)10.0F ? "Low Temperature Alert" : "Weather is Normal";
-      }
-   }
+    public static String checkAlert(double temperature, double humidity) {
 
-   String displayOutput() {
-      double var10000 = this.temperature;
-      return "Weather Report : \nTemperature : " + var10000 + "℃ \nHumidity : " + this.humidity + "% \nAlert : \n" + checkAlert(this.temperature, this.humidity);
-   }
+        if (temperature > 40 && humidity > 80) {
+            return "High Temperature Alert and High Humidity Alert";
+        }
 
-   public String toFileString() {
-    return "Temperature: " + temperature + "°C, " + "Humidity: " + humidity + "%";
-   }
+        if (temperature < 10 && humidity > 80) {
+            return "Low Temperature Alert and High Humidity Alert";
+        }
+
+        if (humidity > 80) {
+            return "High Humidity Alert";
+        }
+
+        if (temperature > 40) {
+            return "High Temperature Alert";
+        }
+
+        if (temperature < 10) {
+            return "Low Temperature Alert";
+        }
+
+        return "Weather is Normal";
+    }
+
+    public String displayOutput() {
+        return "Weather Report:\n" +
+               "Temperature: " + temperature + "°C\n" +
+               "Humidity: " + humidity + "%\n" +
+               "Alert: " + checkAlert(temperature, humidity);
+    }
+
+    public String toFileString() {
+        return "Temperature: " + temperature + "°C, " +
+               "Humidity: " + humidity + "%";
+    }
 }
+
+
 
